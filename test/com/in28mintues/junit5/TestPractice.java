@@ -9,6 +9,7 @@ import java.time.Duration;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,7 @@ class TestPractice {
 	}
 	
 	@Test
+	@Disabled
 	void performanceTest() {
 		assertTimeout(Duration.ofSeconds(5), () -> {
 			for(int i = 0; i <=10000; i++) {
@@ -46,8 +48,10 @@ class TestPractice {
 		assertFalse("abcdefgh".contains("ijk"));
 	}
 	
-	
+//	非 static である必要があるので、必然的に @BeforeAll, @AfterAll はそのままでは指定できない
+//	どうしても指定したい場合は、後述のテストインスンタンスのライフサイクルの指定で PER_CLASS を設定する必要がある
 	@Nested
+	@DisplayName("For an empty Test")
 	class EmptyStringTest {
 		@BeforeEach
 		void setToEmpty() {
