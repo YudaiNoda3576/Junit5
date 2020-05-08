@@ -13,7 +13,9 @@ class SpringTest {
 
 	@Test
 	void test() {
-		fail("まだ実装されていません");
+		int actualLength = "ABCD".length();
+		int expectedLength = 4;
+		assertEquals(actualLength, expectedLength);
 	}
 
 }
