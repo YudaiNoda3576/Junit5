@@ -1,16 +1,22 @@
 package com.in28mintues.junit5;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 class TestPractice {
-
+	
+	private String test;
+	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 	}
@@ -31,4 +37,32 @@ class TestPractice {
 		}
 	  );
 	}
+	
+	@Test
+	@RepeatedTest(10)
+//	テストを実行しない　＝　不要なテストを飛ばして実行スピードをあげることができる
+	@Disabled //Junit4では@Ignored
+	void contains_basic_disable() {
+		assertFalse("abcdefgh".contains("ijk"));
+	}
+	
+	
+	@Nested
+	class EmptyStringTest {
+		@BeforeEach
+		void setToEmpty() {
+			test = "";
+		}
+		
+		@Test
+		void uppercaseIsEmpty() {
+			assertEquals("",test.toUpperCase());
+		}
+		
+		@Test
+		void lengthIsZero() {
+			assertEquals(0,test.length());
+		}
+	}
+	
 }
